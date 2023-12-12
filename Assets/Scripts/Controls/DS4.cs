@@ -16,6 +16,7 @@ public class DS4 : MonoBehaviour
     
     
     public static Gamepad controller = null;
+    private static bool isControllerbound = false;
 
     private static ButtonControl X_Gyro = null;
     private static ButtonControl Y_Gyro = null;
@@ -25,6 +26,9 @@ public class DS4 : MonoBehaviour
     
     public static Gamepad getController()
     {
+        if (!isControllerbound)
+        {
+            
         Debug.Log("Controller override step1");
         //Using system.IO to read the entire JSON file to replace the normal JSON file.
         string newCon = System.IO.File.ReadAllText("Assets/Scripts/Controls/DS4Custom.json");
@@ -38,7 +42,15 @@ public class DS4 : MonoBehaviour
 
         Debug.Log("Controller override complete");
         bindController(DS4.controller);
+
+        isControllerbound = true;
         return DualShock;
+        }
+        else
+        {
+            var DualShock = Gamepad.current;
+            return DualShock;
+        }
     }
 
     static float rawData(float inputData)
