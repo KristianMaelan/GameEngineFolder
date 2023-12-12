@@ -1,10 +1,10 @@
 DPAD:
     UP: Increase gyro sensitivity.
-    DOWN: Decrease gury sensitivity.
+    DOWN: Decrease gyro sensitivity.
     
 COMPASS
     SQUARE/Button 0: Reset camera orientation.
-    CROSS/Button 1: Respawn at spawn.
+    CROSS/Button 1: Respawn drone.
     CIRCLE/Button 2:    
     TRIANGLE/Button 3: Reset camera settings.
 
@@ -15,8 +15,3 @@ LEFTSTICK
 BACKBUTTONS
     LEFT&RIGHTBUMPER: Camera focal length
     
-    
-OTHER BUTTONS
-    SELECT/SHARE: 
-    
-   

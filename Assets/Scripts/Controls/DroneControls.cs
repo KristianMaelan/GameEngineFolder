@@ -32,13 +32,7 @@ public class DroneControls : MonoBehaviour
        startPosition = new Vector3(15, 7, 120);
        startRotation = _rb.transform.rotation.eulerAngles;
     }
-
-    private void Awake()
-    {
-       // startPosition = this.transform;
-        //Debug.Log("Startposition: " + startPosition.position);
-    }
-
+    
     private void Update()
     {
         buttonControls();
