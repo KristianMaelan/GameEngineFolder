@@ -21,8 +21,6 @@ public class CameraControls : MonoBehaviour
     //private bool _BorignalRotScale = true;
     
     private Transform underBody_transform;
-    private Transform originalTransform;
-    private Rigidbody _rbDrone;
     
     // Start is called before the first frame update
     void Start()
@@ -33,14 +31,7 @@ public class CameraControls : MonoBehaviour
         //underBodyCam = GetComponent<Camera>();
         originalGyroSens = gyroSensitivity;
         underBody_transform = this.transform;
-        originalTransform = underBody_transform;
         underBodyCam = GetComponent<Camera>();
-
-        _rbDrone = GetComponentInParent<Rigidbody>();
-        
-
-
-        //Drone = GetComponentInParent<GameObject>();
     }
 
     // Update is called once per frame

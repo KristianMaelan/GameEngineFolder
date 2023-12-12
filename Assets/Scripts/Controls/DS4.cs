@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.DualShock;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
+using Application = UnityEngine.Device.Application;
 
 public class DS4 : MonoBehaviour
 {
@@ -29,22 +30,24 @@ public class DS4 : MonoBehaviour
         if (!isControllerbound)
         {
             
-        Debug.Log("Controller override step1");
-        //Using system.IO to read the entire JSON file to replace the normal JSON file.
-        string newCon = System.IO.File.ReadAllText("Assets/Scripts/Controls/DS4Custom.json");
+            Debug.Log("Controller override step1");
+            //Using system.IO to read the entire JSON file to replace the normal JSON file.
+            string filePath = Path.Combine(Application.streamingAssetsPath, "DS4Custom.JSON");
+            string newCon = System.IO.File.ReadAllText(filePath);
         
-        //Overriding the old layout
-        InputSystem.RegisterLayoutOverride(newCon, "Newoverride");
+            //Overriding the old layout
+            InputSystem.RegisterLayoutOverride(newCon, "Newoverride");
 
-        //replacing old controller with new controller with new layout
-        var DualShock = Gamepad.current;
-        DS4.controller = DualShock;
+            //replacing old controller with new controller with new layout
+            var DualShock = InputSystem.GetDevice<DualShock4GamepadHID>();
+            //var DualShock = Gamepad.current;
+            DS4.controller = DualShock;
 
-        Debug.Log("Controller override complete");
-        bindController(DS4.controller);
+            Debug.Log("Controller override complete");
+            bindController(DS4.controller);
 
-        isControllerbound = true;
-        return DualShock;
+            isControllerbound = true;
+            return DualShock;
         }
         else
         {

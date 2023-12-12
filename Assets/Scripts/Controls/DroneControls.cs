@@ -15,12 +15,8 @@ public class DroneControls : MonoBehaviour
     private Rigidbody _rb;
 
     private float throttleLevel = 0;
-    private Vector3 startPosition;
-    private Vector3 startRotation;
     [SerializeField] private float throttleMultiplier = 5; 
-
-    private float tiltAmount = 1;
-    private float tiltSpeed = 5;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +24,6 @@ public class DroneControls : MonoBehaviour
         Debug.Log("Drone controls calling override");
         controller = DS4.getController();
         _rb = GetComponent<Rigidbody>();
-       // startPosition = this.transform;
-       startPosition = new Vector3(15, 7, 120);
-       startRotation = _rb.transform.rotation.eulerAngles;
     }
     
     private void Update()
@@ -47,9 +40,6 @@ public class DroneControls : MonoBehaviour
 
     void stickControls()
     {
-        
-
-        float yawRotation = 0;
         //Leftstick
         {
             //Yaw left
@@ -85,7 +75,6 @@ public class DroneControls : MonoBehaviour
             //throttle up
             if (controller.leftStick.y.ReadValue() > 0.05)
             {
-                //_rb.AddForce(_rb.transform.forward * controller.leftStick.y.ReadValue() / 2, ForceMode.VelocityChange);
 
                 if (throttleLevel < controller.leftStick.y.ReadValue())
                 {
@@ -116,22 +105,17 @@ public class DroneControls : MonoBehaviour
 
 
                  transform.localRotation = Quaternion.Euler(HorizontalTilt, 0, 0);
-                //transform.rotation.eulerAngles.Set(transform.rotation.x, controller.rightStick.y.ReadValue() * 5, transform.rotation.z);;
-                // _rb.transform.Rotate(_rb.transform.rotation.eulerAngles, controller.rightStick.y.ReadValue() * 5);
-            
+               
                 float stickValueX = controller.rightStick.x.ReadValue();
                 VerticalTilt = Mathf.Lerp(45, -45, (stickValueX + 1) / 2);
 
 
                 transform.localRotation = Quaternion.Euler(HorizontalTilt, 0, VerticalTilt);
-                //transform.localRotation = Quaternion.Euler(HorizontalTilt, 0, 0);
+             
             }
         }
-        
-        //throttleLevel = Mathf.Clamp(throttleLevel, 0f, 100f);
+        //Adding force to make it fly.
         _rb.AddForce(_rb.transform.up * (throttleLevel / throttleMultiplier), ForceMode.Impulse);
-
-
     }
 
     void buttonControls()
@@ -146,7 +130,8 @@ public class DroneControls : MonoBehaviour
 
     void respawnDrone()
     {
-        Debug.Log("Restarting world " + startPosition);
+        //restarts the scene, in this instance, faster than using initial positions and rotations.
+        Debug.Log("Restarting world ");
         SceneManager.LoadScene("Forest");
         
         
