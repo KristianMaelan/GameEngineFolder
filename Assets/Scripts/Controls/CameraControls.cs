@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
 using Vector3 = System.Numerics.Vector3;
 
 public class CameraControls : MonoBehaviour
@@ -35,6 +37,7 @@ public class CameraControls : MonoBehaviour
         underBodyCam = GetComponent<Camera>();
 
         _rbDrone = GetComponentInParent<Rigidbody>();
+        
 
 
         //Drone = GetComponentInParent<GameObject>();
@@ -43,6 +46,7 @@ public class CameraControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         {
             //COMPASS
             if (controller.buttonWest.wasPressedThisFrame)
@@ -50,11 +54,9 @@ public class CameraControls : MonoBehaviour
                 Debug.Log("Resetting camera rotation");
 
                 underBodyCam.transform.rotation = transform.parent.rotation;
-                //underBodyCam.transform.up = _rbDrone.transform.forward;
+                underBodyCam.transform.rotation =quaternion.EulerXYZ(underBodyCam.transform.rotation.x, 140,
+                    underBodyCam.transform.rotation.z);
 
-                //underBody_transform.forward = _rbDrone.transform.forward;
-
-                //underBodyCam.transform.rotation = underBody_transform.rotation;
             }
             else if (controller.buttonNorth.isPressed)
             {

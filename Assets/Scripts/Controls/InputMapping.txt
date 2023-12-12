@@ -4,7 +4,7 @@ DPAD:
     
 COMPASS
     SQUARE/Button 0: Reset camera orientation.
-    CROSS/Button 1:
+    CROSS/Button 1: Respawn at spawn.
     CIRCLE/Button 2:    
     TRIANGLE/Button 3: Reset camera settings.
 
@@ -12,6 +12,11 @@ LEFTSTICK
     X-AXIS: Yaw
     Y-AXIS: Throttle
     
-OTHER BUTTONS
-    SELECT/SHARE: Respawn at spawn.
+BACKBUTTONS
+    LEFT&RIGHTBUMPER: Camera focal length
     
+    
+OTHER BUTTONS
+    SELECT/SHARE: 
+    
+   
